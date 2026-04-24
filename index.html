@@ -1,112 +1,696 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>The HP Web</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE HP Web</title>
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#07070d;
+color:white;
+overflow-x:hidden;
+}
+
+/* background */
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 15% 20%, rgba(124,58,237,.25), transparent 20%),
+radial-gradient(circle at 80% 15%, rgba(0,198,255,.20), transparent 18%),
+radial-gradient(circle at 50% 80%, rgba(255,60,120,.12), transparent 20%);
+z-index:-3;
+}
+
+/* particles */
+canvas{
+position:fixed;
+inset:0;
+z-index:-2;
+pointer-events:none;
+}
+
+/* progress bar */
+.progress{
+position:fixed;
+top:0;
+left:0;
+height:4px;
+width:0%;
+background:linear-gradient(90deg,#7c3aed,#00c6ff,#ff3c78);
+z-index:999;
+}
+
+/* navbar */
+header{
+position:fixed;
+top:0;
+width:100%;
+padding:20px 7%;
+backdrop-filter:blur(18px);
+background:rgba(255,255,255,.03);
+border-bottom:1px solid rgba(255,255,255,.06);
+z-index:100;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-size:28px;
+font-weight:800;
+background:linear-gradient(90deg,#7c3aed,#00c6ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-size:14px;
+transition:.3s;
+}
+
+nav a:hover{
+color:#00c6ff;
+}
+
+/* hero */
+.hero{
+min-height:100vh;
+display:grid;
+grid-template-columns:1.1fr .9fr;
+align-items:center;
+gap:50px;
+padding:130px 7% 70px;
+}
+
+.badge{
+display:inline-block;
+padding:8px 16px;
+border-radius:999px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+margin-bottom:20px;
+font-size:13px;
+}
+
+.hero h1{
+font-size:72px;
+line-height:1.05;
+font-weight:800;
+margin-bottom:12px;
+}
+
+.hero h1 span{
+background:linear-gradient(90deg,#7c3aed,#00c6ff,#ff3c78);
+background-size:300%;
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:move 6s linear infinite;
+}
+
+@keyframes move{
+100%{background-position:300%;}
+}
+
+.hero h3{
+font-size:24px;
+color:#00c6ff;
+margin-bottom:20px;
+min-height:35px;
+}
+
+.hero p{
+color:#c4c8d8;
+line-height:1.9;
+font-size:16px;
+max-width:600px;
+margin-bottom:30px;
+}
+
+.btns{
+display:flex;
+gap:16px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 26px;
+border-radius:14px;
+text-decoration:none;
+font-weight:600;
+transition:.35s;
+}
+
+.primary{
+background:linear-gradient(90deg,#7c3aed,#00c6ff);
+color:white;
+box-shadow:0 15px 40px rgba(124,58,237,.35);
+}
+
+.secondary{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+color:white;
+}
+
+.btn:hover{
+transform:translateY(-5px) scale(1.03);
+}
+
+/* hero right */
+.profile-box{
+position:relative;
+padding:28px;
+border-radius:30px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(15px);
+box-shadow:0 25px 60px rgba(0,0,0,.45);
+text-align:center;
+transform-style:preserve-3d;
+}
+
+.glow{
+position:absolute;
+width:220px;
+height:220px;
+border-radius:50%;
+background:#00c6ff;
+filter:blur(100px);
+top:-50px;
+right:-50px;
+opacity:.4;
+}
+
+.avatar{
+width:170px;
+height:170px;
+margin:auto;
+border-radius:28px;
+display:grid;
+place-items:center;
+font-size:58px;
+font-weight:800;
+background:linear-gradient(135deg,#7c3aed,#00c6ff);
+margin-bottom:18px;
+}
+
+.mini{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px;
+margin-top:22px;
+}
+
+.mini div{
+padding:16px;
+border-radius:18px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.mini h4{
+font-size:28px;
+}
+
+/* sections */
+section{
+padding:90px 7%;
+}
+
+.title{
+font-size:42px;
+margin-bottom:14px;
+}
+
+.sub{
+color:#bfc4d6;
+line-height:1.9;
+max-width:760px;
+margin-bottom:40px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:22px;
+}
+
+.card{
+padding:26px;
+border-radius:24px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.07);
+transition:.35s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,198,255,.12);
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+/* counters */
+.counters{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
+margin-top:15px;
+}
+
+.counter{
+padding:22px;
+border-radius:22px;
+background:rgba(255,255,255,.05);
+text-align:center;
+}
+
+.counter h2{
+font-size:38px;
+color:#00c6ff;
+}
+
+/* skills */
+.skill{
+margin-bottom:22px;
+}
+
+.skill-head{
+display:flex;
+justify-content:space-between;
+margin-bottom:8px;
+}
+
+.bar{
+height:12px;
+border-radius:999px;
+background:#1b1b28;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+width:0;
+background:linear-gradient(90deg,#7c3aed,#00c6ff);
+transition:2s;
+}
+
+/* timeline */
+.timeline{
+border-left:2px solid rgba(255,255,255,.08);
+padding-left:28px;
+display:grid;
+gap:28px;
+}
+
+.item{
+position:relative;
+}
+
+.item::before{
+content:'';
+position:absolute;
+left:-36px;
+top:4px;
+width:16px;
+height:16px;
+border-radius:50%;
+background:linear-gradient(90deg,#7c3aed,#00c6ff);
+}
+
+.year{
+font-size:13px;
+color:#00c6ff;
+margin-bottom:6px;
+}
+
+/* contact */
+.socials{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.socials a{
+padding:14px 22px;
+border-radius:16px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+text-decoration:none;
+color:white;
+transition:.3s;
+}
+
+.socials a:hover{
+transform:translateY(-6px);
+}
+
+/* footer */
+footer{
+padding:28px;
+text-align:center;
+color:#bfc4d6;
+border-top:1px solid rgba(255,255,255,.06);
+}
+
+/* reveal */
+.reveal{
+opacity:0;
+transform:translateY(55px);
+transition:1s;
+}
+
+.reveal.show{
+opacity:1;
+transform:none;
+}
+
+/* responsive */
+@media(max-width:980px){
+.hero{
+grid-template-columns:1fr;
+}
+.grid,.counters{
+grid-template-columns:1fr;
+}
+nav ul{
+display:none;
+}
+.hero h1{
+font-size:48px;
+}
+}
+
+</style>
 </head>
+
 <body>
-	<!----hero Section start---->
 
-	<div class="hero">
-		<nav>
-			<h2 class="logo">The<span>HP</span></h2>
-			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">About Us</a></li>
-				<li><a href="#">Services</a></li>
-				<li><a href="#">Skills</a></li>
-				<li><a href="#">Contact Us</a></li>
-			</ul>
-			<a href="https://youtube.com/@hphammad" class="btn">Subscribe</a>
-		</nav>
+<div class="progress"></div>
+<canvas id="canvas"></canvas>
 
-		<div class="content">
-			<h4>Hello, my name is</h4>
-			<h1>Hammad <span>Payawala</span></h1>
-			<h3>I am a Web Designer.</h3>			
-		</div>
-	</div>
+<header>
+<nav>
+<div class="logo">The HP</div>
 
-	<!----About section start---->
-	<section class="about">
-		<div class="main">
-			<img src="img/main-img.png">
-			<div class="about-text">
-				<h2>About Me</h2>
-				<h5>Developer <span>& Designer</span></h5>
-				<p>I am a  web developer. I can provide clean code and pixel perfect design. I also make the website more & more interactive with web animations. A responsive design makes your website accessible to all users, regardless of their device.</p>
-				<a href="https://instagram.com/hp_hammad"><button type="button">Let's Talk</button></a>
-			</div>
-		</div>
-	</section>
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+</header>
 
-	<!-----service section start----------->
-	<div class="service">
-		<div class="title">
-			<h2>Our Services</h2>
-		</div>
+<section class="hero">
 
-		<div class="box">
-			<div class="card">
-				<i class="fas fa-bars"></i>
-				<h5>Web Development</h5>
-				<div class="pra">
-					<p>Every website should be built with two primary goals: Firstly, it needs to work across all devices. Secondly, it needs to be fast as possible.</p>
+<div class="reveal">
+<div class="badge">🚀 Available For Work</div>
 
-					<p style="text-align: center;">
-						<a class="button" href="#">Read More</a>
-					</p>
-				</div>
-			</div>
+<h1>Payawala <span>Hammad</span></h1>
 
-			<div class="card">
-				<i class="far fa-user"></i>
-				<h5>Web Development</h5>
-				<div class="pra">
-					<p>Every website should be built with two primary goals: Firstly, it needs to work across all devices. Secondly, it needs to be fast as possible.</p>
+<h3><span id="typing"></span></h3>
 
-					<p style="text-align: center;">
-						<a class="button" href="#">Read More</a>
-					</p>
-				</div>
-			</div>
+<p>
+Engineering precision meets design creativity and technical expertise. I build practical ideas into premium digital experiences.
+</p>
 
-			<div class="card">
-				<i class="far fa-bell"></i>
-				<h5>Web Development</h5>
-				<div class="pra">
-					<p>Every website should be built with two primary goals: Firstly, it needs to work across all devices. Secondly, it needs to be fast as possible.</p>
+<div class="btns">
+<a href="#contact" class="btn primary">Hire Me</a>
+<a href="https://drive.google.com/file/d/1fxcnnwX02u8wOf3F8MUaQLROeYzj3V-h/view?usp=sharing" class="btn secondary">Download CV</a>
+</div>
+</div>
 
-					<p style="text-align: center;">
-						<a class="button" href="#">Read More</a>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="profile-box reveal tilt">
+<div class="glow"></div>
 
-	<!------Contact Me------>
-	<div class="contact-me">
-		<p>Let Me Get You A Beautiful Website.</p>
-		<a class="button-two" href="#">Hire Me</a>
-	</div>
+<div class="avatar">HP</div>
 
-	<!------footer start--------->
-	<footer>
-		<p>Hammad P</p>
-		<p>Social Media Handles:</p>
-		<div class="social">
-			<a href="https://instagram.com/hp_hammad"><i class="fab fa-instagram"></i></a>
-			<a href="https://youtube.com/@hphammad"><i class="fab fa-youtube"></i></a>
-			<a href="https://twitter.com/hammad_hp"><i class="fab fa-twitter"></i></a>
-		</div>
-		<p class="end">CopyRight By HP</p>
-	</footer>
+<h2>Creative + Technical</h2>
+<p style="color:#c4c8d8;margin-top:8px;">Smart ideas powered by skill & ambition.</p>
+
+<div class="mini">
+<div><h4>4+</h4><p>Core Skills</p></div>
+<div><h4>15+</h4><p>Projects</p></div>
+<div><h4>100%</h4><p>Dedication</p></div>
+<div><h4>24/7</h4><p>Growth</p></div>
+</div>
+</div>
+
+</section>
+
+<section id="about" class="reveal">
+<h2 class="title">About Me</h2>
+<p class="sub">
+I’m passionate about automobiles, computers, design and business-minded growth. I combine engineering logic with creative execution.
+</p>
+
+<div class="counters">
+<div class="counter"><h2 class="count" data-target="15">0</h2><p>Projects</p></div>
+<div class="counter"><h2 class="count" data-target="4">0</h2><p>Main Skills</p></div>
+<div class="counter"><h2 class="count" data-target="100">0</h2><p>Passion</p></div>
+<div class="counter"><h2 class="count" data-target="24">0</h2><p>Learning</p></div>
+</div>
+</section>
+
+<section id="projects" class="reveal">
+<h2 class="title">Featured Work</h2>
+<p class="sub">Selected projects that reflect creativity and practical execution.</p>
+
+<div class="grid">
+<div class="card">
+<h3>Bag Store Website</h3>
+<p>Modern e-commerce UI for premium bag collections.</p>
+</div>
+
+<div class="card">
+<h3>Elite Portfolio</h3>
+<p>Luxury personal brand website with animations.</p>
+</div>
+
+<div class="card">
+<h3>AutoCAD Concepts</h3>
+<p>Technical drawings and engineering-based designs.</p>
+</div>
+</div>
+</section>
+
+<section id="skills" class="reveal">
+<h2 class="title">Skills</h2>
+
+<div class="skill">
+<div class="skill-head"><span>AutoCAD</span><span>95%</span></div>
+<div class="bar"><div class="fill" data-width="95%"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-head"><span>Computer Tech</span><span>90%</span></div>
+<div class="bar"><div class="fill" data-width="90%"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-head"><span>Web Development</span><span>72%</span></div>
+<div class="bar"><div class="fill" data-width="72%"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-head"><span>Graphic Design</span><span>65%</span></div>
+<div class="bar"><div class="fill" data-width="65%"></div></div>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">Experience</h2>
+
+<div class="timeline">
+<div class="item">
+<div class="year">2024</div>
+<h3>Engineering Journey</h3>
+<p class="sub">Focused on automobile engineering fundamentals.</p>
+</div>
+
+<div class="item">
+<div class="year">2025</div>
+<h3>Creative Growth</h3>
+<p class="sub">Started design work and digital creativity.</p>
+</div>
+
+<div class="item">
+<div class="year">2026</div>
+<h3>Web Development</h3>
+<p class="sub">Built modern websites and personal brand presence.</p>
+</div>
+</div>
+</section>
+
+<section id="contact" class="reveal">
+<h2 class="title">Connect With Me</h2>
+<p class="sub">Let’s collaborate and create something valuable.</p>
+
+<div class="socials">
+<a href="#">LinkedIn</a>
+<a href="#">Instagram</a>
+<a href="#">Email</a>
+<a href="#">WhatsApp</a>
+</div>
+</section>
+
+<footer>
+© 2026 Payawala Hammad • Elite V2
+</footer>
+
+<script>
+/* typing */
+const words=["Automobile Engineer","Designer","Computer Expert","Creative Problem Solver"];
+let i=0,j=0,del=false;
+function type(){
+let txt=words[i];
+document.getElementById("typing").textContent=txt.substring(0,j);
+
+if(!del && j<txt.length){j++;setTimeout(type,90);}
+else if(del && j>0){j--;setTimeout(type,45);}
+else{
+del=!del;
+if(!del)i=(i+1)%words.length;
+setTimeout(type,900);
+}
+}
+type();
+
+/* reveal */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting) entry.target.classList.add("show");
+});
+},{threshold:.15});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+/* bars */
+document.querySelectorAll(".fill").forEach(bar=>{
+observer.observe(bar);
+});
+const bars=document.querySelectorAll(".fill");
+const skillObs=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.style.width=e.target.dataset.width;
+}
+});
+},{threshold:.4});
+bars.forEach(b=>skillObs.observe(b));
+
+/* counters */
+const counters=document.querySelectorAll(".count");
+const countObs=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+let el=entry.target;
+let target=+el.dataset.target;
+let c=0;
+let step=Math.max(1,Math.ceil(target/80));
+
+let run=setInterval(()=>{
+c+=step;
+if(c>=target){
+el.innerText=target + (target===100 ? "%" : "+");
+clearInterval(run);
+}else{
+el.innerText=c;
+}
+},20);
+countObs.unobserve(el);
+}
+});
+},{threshold:.5});
+counters.forEach(c=>countObs.observe(c));
+
+/* progress */
+window.addEventListener("scroll",()=>{
+let s=document.documentElement.scrollTop;
+let h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+document.querySelector(".progress").style.width=(s/h)*100+"%";
+});
+
+/* particles */
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+let w,h,arr=[];
+function resize(){
+w=canvas.width=innerWidth;
+h=canvas.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
+
+for(let k=0;k<70;k++){
+arr.push({
+x:Math.random()*w,
+y:Math.random()*h,
+r:Math.random()*2+1,
+dx:(Math.random()-.5)*.45,
+dy:(Math.random()-.5)*.45
+});
+}
+
+function draw(){
+ctx.clearRect(0,0,w,h);
+arr.forEach(p=>{
+p.x+=p.dx;
+p.y+=p.dy;
+if(p.x<0||p.x>w)p.dx*=-1;
+if(p.y<0||p.y>h)p.dy*=-1;
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle="rgba(255,255,255,.45)";
+ctx.fill();
+});
+requestAnimationFrame(draw);
+}
+draw();
+
+/* tilt */
+const tilt=document.querySelector(".tilt");
+tilt.addEventListener("mousemove",e=>{
+const r=tilt.getBoundingClientRect();
+const x=e.clientX-r.left;
+const y=e.clientY-r.top;
+const rx=-(y-r.height/2)/18;
+const ry=(x-r.width/2)/18;
+tilt.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+});
+tilt.addEventListener("mouseleave",()=>{
+tilt.style.transform="rotateX(0) rotateY(0)";
+});
+</script>
+
 </body>
 </html>
